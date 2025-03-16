@@ -30,8 +30,6 @@ cargo build --release
 Run the emulator:
 To run the emulator, pass a CHIP-8 binary file (e.g., a .ch8 file) as an argument:
 
-bash
-Copy
 cargo run -- path_to_chip8_program.ch8
 Loading a CHIP-8 Program
 The emulator expects the CHIP-8 program to be in binary format (a .ch8 file).
@@ -55,20 +53,21 @@ Z	A
 X	0
 C	B
 V	F
+
 Arrow keys can be used to move around, depending on the program you're running.
 How the Emulator Works
 The emulator follows the fetch-decode-execute cycle for the CHIP-8 processor:
 
 Fetch: The emulator fetches the next 16-bit instruction from memory using the program counter (pc).
+
 Decode: The instruction is decoded to determine what operation needs to be performed. CHIP-8 instructions are 2 bytes (16 bits) long.
+
 Execute: Based on the decoded instruction, the corresponding action is executed. This may involve modifying registers, memory, or screen output.
 The emulator also handles input from the keypad, updates the timers (dt and st), and refreshes the screen accordingly.
 
 Project Structure
 The project is structured as follows:
 
-bash
-Copy
 chip8-emulator/
 ├── src/
 │   ├── main.rs           # Entry point for the emulator
@@ -76,6 +75,7 @@ chip8-emulator/
 │   └── utils.rs          # Helper functions (optional)
 ├── Cargo.toml            # Rust project configuration
 └── README.md             # This file
+
 emulator.rs
 Contains the Emu struct, which represents the CHIP-8 system. The struct includes the program counter, registers, memory, stack, and methods for fetching, decoding, and executing instructions.
 
