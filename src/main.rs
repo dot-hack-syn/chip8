@@ -9,6 +9,9 @@ const NUM_KEYS: usize = 16;
 
 // start address offset per chip 8 sytem design 
 const START_ADDR: u16 = 0x200;
+
+#[allow(dead_code)]
+
 pub struct Emu {
     // program counter
     pc: u16,
@@ -30,7 +33,7 @@ impl Emu {
         Self {
             pc: START_ADDR,
             ram: [0; RAM_SIZE],
-            screen: [false, SCREEN_WIDTH * SCREEN_HEIGHT],
+            screen: [false; SCREEN_WIDTH * SCREEN_HEIGHT],
             v_reg: [0; NUMB_REGS],
             i_reg: 0,
             sp: 0,
@@ -42,17 +45,19 @@ impl Emu {
     }
 
     // Fetch
-    fn fetch(&mut self) -> u16 {
-        let instruction = (ram[pc as usize] as u16) << 8 | ram[(pc + 1) as usize] as u16;
-        pc+=2;
+    fn fetch( self: &mut Self) -> u16 {
+        let instruction = (self.ram[self.pc as usize] as u16) << 8 | self.ram[(self.pc + 1) as usize] as u16;
+        self.pc += 2;
         instruction
     }
 
     // Decode
+    fn decode(&mut self, instruction: u16) {
+        // match statement that matches opcode of instruction set
+    }
 
-    // Execute
 }
-
+    
 fn main() {
     // create new emu instance
     let mut emu = Emu::new();
@@ -62,7 +67,7 @@ fn main() {
         let instruction = emu.fetch();
 
         // decode
-
+        emu.decode(instruction);
         // exectue 
     }
 }
