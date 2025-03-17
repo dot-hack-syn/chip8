@@ -1,3 +1,5 @@
+use std::u16;
+
 const RAM_SIZE: usize = 4096;
 
 pub const SCREEN_HEIGHT: usize = 32;
@@ -42,6 +44,16 @@ impl Emu {
             dt: 0,
             st: 0
         }
+    }
+
+    fn push(self: &mut Self, val: u16) {
+        self.stack[self.sp as usize] = val;
+        self.sp += 1;
+    }
+
+    fn pop(self: &mut Self) -> u16 {
+        self.sp -= 1;
+        self.stack[self.sp as usize]
     }
 
     // Fetch
