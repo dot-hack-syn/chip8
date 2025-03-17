@@ -56,6 +56,18 @@ impl Emu {
         self.stack[self.sp as usize]
     }
 
+    // timers
+    pub fn tick_timers(self: &mut Self) {
+        if self.dt > 0 {
+            self.dt -= 1;
+        }
+
+        if self.st == 1 {
+            // sound
+        }
+        self.st -= 1;
+    }
+
     // Fetch
     fn fetch( self: &mut Self) -> u16 {
         let instruction = (self.ram[self.pc as usize] as u16) << 8 | self.ram[(self.pc + 1) as usize] as u16;
